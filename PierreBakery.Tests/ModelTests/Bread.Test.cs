@@ -22,5 +22,14 @@ namespace PierreBakery.Tests
       int result = newBread.AmountOfBread;
       Assert.AreEqual(newAmountOfBread, result);
     }
+
+    [TestMethod]
+    public void SetAmountOfBread_SetsValueOfAmountOfBread_Void()
+    {
+      Bread newBread = new Bread(6);
+      int newAmountOfBread = 44;
+      newBread.AmountOfBread = newAmountOfBread;
+      Assert.AreEqual(newAmountOfBread, newBread.AmountOfBread);
+    }
   }
 }
