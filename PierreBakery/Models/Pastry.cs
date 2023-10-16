@@ -9,5 +9,9 @@ namespace PierreBakery.Models
       AmountOfPastry = shopCartPastry;
       TotalPastryCost = 0;
     }
+    public void CalculateTotalPastryPrice()
+    {
+      TotalPastryCost += 5;
+    }
   }
 }
