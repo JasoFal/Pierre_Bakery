@@ -11,7 +11,10 @@ namespace PierreBakery.Models
     }
     public void CalculateTotalPastryPrice()
     {
-      TotalPastryCost += 5;
+      for (int counter = 1; counter <= AmountOfPastry; counter++)
+      {
+        TotalPastryCost += 2;
+      }
     }
   }
 }
