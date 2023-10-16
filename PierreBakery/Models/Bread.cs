@@ -9,7 +9,7 @@ namespace PierreBakery.Models
       AmountOfBread = shopCartBread;
       TotalBreadCost = 0;
     }
-    public void CalculateBreadPrice()
+    public void CalculateTotalBreadPrice()
     {
       for (int counter = 1; counter <= AmountOfBread; counter++)
       {
