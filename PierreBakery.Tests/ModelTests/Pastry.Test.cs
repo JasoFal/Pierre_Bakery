@@ -30,5 +30,12 @@ namespace PierreBakery.Tests
       newPastry.AmountOfPastry = newAmountOfPastry;
       Assert.AreEqual(newAmountOfPastry, newPastry.AmountOfPastry);
     }
+
+    [TestMethod]
+    public void GetTotalPastryCost_ReturnTotalPastryCost_Int()
+    {
+      Pastry newPastry = new Pastry(6);
+      Assert.AreEqual(0, newPastry.TotalPastryCost);
+    }
   }
 }
