@@ -65,7 +65,9 @@ namespace PierreBakery.Tests
     [TestMethod]
     public void CalculateTotalPastryPrice_Every4thPastryIsSkipped_Void()
     {
-      
+      Pastry newPastry = new Pastry(20);
+      newPastry.CalculateTotalPastryPrice();
+      Assert.AreEqual(30, newPastry.TotalPastryCost);
     }
   }
 }

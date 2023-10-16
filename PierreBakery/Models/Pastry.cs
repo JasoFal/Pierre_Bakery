@@ -13,7 +13,10 @@ namespace PierreBakery.Models
     {
       for (int counter = 1; counter <= AmountOfPastry; counter++)
       {
-        TotalPastryCost += 2;
+        if (counter % 4 != 0)
+        {
+          TotalPastryCost += 2;
+        }
       }
     }
   }
