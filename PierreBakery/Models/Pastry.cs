@@ -2,9 +2,10 @@ namespace PierreBakery.Models
 {
   public class Pastry
   {
-    public Pastry()
+    public int AmountOfPastry { get; }
+    public Pastry(int shopCartPastry)
     {
-      
+      AmountOfPastry = shopCartPastry;
     }
   }
 }
