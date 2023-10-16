@@ -21,5 +21,14 @@ namespace PierreBakery.Tests
       int result = newPastry.AmountOfPastry;
       Assert.AreEqual(newAmountOfPastry, result);
     }
+
+    [TestMethod]
+    public void SetAmountOfPastry_SetsValueOfAmountOfPastry_Void()
+    {
+      Pastry newPastry = new Pastry(7);
+      int newAmountOfPastry = 47;
+      newPastry.AmountOfPastry = newAmountOfPastry;
+      Assert.AreEqual(newAmountOfPastry, newPastry.AmountOfPastry);
+    }
   }
 }
