@@ -63,5 +63,12 @@ namespace PierreBakery.Tests
       newBread.CalculateBreadPrice();
       Assert.AreEqual(10, newBread.TotalBreadCost);
     }
+    [TestMethod]
+    public void CalculateBreadPrice_Every3rdBreadIsFree_Void()
+    {
+      Bread newBread = new Bread(9);
+      newBread.CalculateBreadPrice();
+      Assert.AreEqual(30, newBread.TotalBreadCost);
+    }
   }
 }

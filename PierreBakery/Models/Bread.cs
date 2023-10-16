@@ -13,7 +13,10 @@ namespace PierreBakery.Models
     {
       for (int counter = 1; counter <= AmountOfBread; counter++)
       {
-        TotalBreadCost += 5;
+        if (counter % 3 != 0)
+        {
+          TotalBreadCost += 5;
+        }
       }
     }
   }
