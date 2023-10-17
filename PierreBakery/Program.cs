@@ -15,7 +15,7 @@ namespace PierreBakery
       Console.WriteLine("Pastries cost $2 each.");
       Console.WriteLine("We are currently running a limited time promotion.");
       Console.WriteLine("For the next week if you buy 2 bread you get 1 free and if you buy 3 pastries you get 1 free.");
-      Console.WriteLine("Hurry now because the offer won't last.");
+      Console.WriteLine("Hurry now because the offer won't last long!");
       Console.WriteLine("If you wish to purchase bread type in 'bread' below, if you wish to purchase pastries type in pastry below.");
       string userResponse = Console.ReadLine();
       if (userResponse.ToLower() == "bread")
