@@ -16,11 +16,13 @@ _Welcome to Pierre Bakery we have 2 products bread and pastries. Bread is $5 and
 
 ## Setup/Installation Requirements
 
-* _Open Git Bash/Open terminal of your choice and type in git clone then copy and paste <mark>https://github.com/JasoFal/Pierre_Bakery.git<mark>_
-* _Once cloned open program using either Git Bash/ a terminal of your choice using the cd command to reach file. Or going into file explorer and opening it manually._
-* _Then once opened in VSCode terminal type dotnet build within PierreBakery directory._
-* _To run app type dotnet run in VSCode terminal within PierreBakery directory_
-* _To test app type dotnet test in VSCode terminal within PierreBakery_
+1. _Open Git Bash/Open terminal of your choice navigate to directory of your choice and run this command `git clone https://github.com/JasoFal/Pierre_Bakery.git`_
+2. _Once you have cloned the project, navigate to project folder using Git Bash/ a terminal of your choice using the cd command. Or you can use file explorer to open the project manually._
+3. _Then once in the PierreBakery directory, run: `dotnet build`._
+------------------
+* _Optional Run and Test_
+* _To run the app type `dotnet run` in terminal within PierreBakery directory_
+* _To test the app type `dotnet test` in terminal within PierreBakery.Tests_
 
 ## Known Bugs
 
