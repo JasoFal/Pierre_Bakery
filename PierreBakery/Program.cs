@@ -141,10 +141,12 @@ namespace PierreBakery
       if (Bread.AmountOfBread != 0)
       {
         Console.WriteLine($"Amount of Bread: {Bread.AmountOfBread}");
+        Console.WriteLine($"Bread Cost: ${Bread.TotalBreadCost}");
       }
       if (Pastry.AmountOfPastry != 0)
       {
         Console.WriteLine($"Amount of Pastry: {Pastry.AmountOfPastry}");
+        Console.WriteLine($"Pastry Cost: ${Pastry.TotalPastryCost}");
       }
       Console.WriteLine("Your total is:");
       Console.WriteLine($"${Pastry.TotalPastryCost + Bread.TotalBreadCost}");
