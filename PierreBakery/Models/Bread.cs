@@ -2,14 +2,14 @@ namespace PierreBakery.Models
 {
   public class Bread
   {
-    public int AmountOfBread { get; set; }
-    public int TotalBreadCost { get; set; }
-    public Bread(int shopCartBread)
+    public static int AmountOfBread { get; set; }
+    public static int TotalBreadCost { get; set; }
+    public Bread()
     {
-      AmountOfBread = shopCartBread;
+      AmountOfBread = 0;
       TotalBreadCost = 0;
     }
-    public void CalculateTotalBreadPrice()
+    public static int CalculateTotalBreadPrice()
     {
       for (int counter = 1; counter <= AmountOfBread; counter++)
       {
@@ -18,6 +18,13 @@ namespace PierreBakery.Models
           TotalBreadCost += 5;
         }
       }
+      return TotalBreadCost;
+    }
+
+    public static void ClearAll()
+    {
+      AmountOfBread = 0;
+      TotalBreadCost = 0;
     }
   }
 }
