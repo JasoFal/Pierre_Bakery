@@ -75,8 +75,10 @@ namespace PierreBakery.Tests
       Pastry.AmountOfPastry = 500;
       Pastry.CalculateTotalPastryPrice();
       Pastry.ClearAll();
-      int result = Pastry.TotalPastryCost;
-      Assert.AreEqual(result, 0);
+      int result1 = Pastry.TotalPastryCost;
+      int result2 = Pastry.AmountOfPastry;
+      Assert.AreEqual(result1, 0);
+      Assert.AreEqual(result2, 0);
     }
   }
 }
