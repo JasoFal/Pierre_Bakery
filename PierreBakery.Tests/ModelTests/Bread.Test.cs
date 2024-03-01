@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PierreBakery.Models;
@@ -5,70 +6,78 @@ using PierreBakery.Models;
 namespace PierreBakery.Tests
 {
   [TestClass]
-  public class BreadTests
+  public class BreadTests : IDisposable
   {
-    [TestMethod]
-    public void BreadConstructor_CreatesInstanceOfBread_Bread()
+    public void Dispose()
     {
-      Bread newBread = new Bread(4);
-      Assert.AreEqual(typeof(Bread), newBread.GetType());
+      Bread.ClearAll();
     }
 
     [TestMethod]
-    public void GetAmountOfBread_ReturnAmountOfBread_Int()
+    public void AmountOfBread_AmountOfBreadEquals0_Int()
     {
-      int newAmountOfBread = 6;
-      Bread newBread = new Bread(newAmountOfBread);
-      int result = newBread.AmountOfBread;
-      Assert.AreEqual(newAmountOfBread, result);
+      int result = Bread.AmountOfBread;
+      Assert.AreEqual(result, 0);
     }
 
     [TestMethod]
     public void SetAmountOfBread_SetsValueOfAmountOfBread_Void()
     {
-      Bread newBread = new Bread(6);
+      Bread.AmountOfBread = 10;
       int newAmountOfBread = 44;
-      newBread.AmountOfBread = newAmountOfBread;
-      Assert.AreEqual(newAmountOfBread, newBread.AmountOfBread);
+      Bread.AmountOfBread = newAmountOfBread;
+      Assert.AreEqual(newAmountOfBread, Bread.AmountOfBread);
     }
 
     [TestMethod]
-    public void GetTotalBreadCost_ReturnTotalBreadCost_Int()
+    public void TotalBreadCost_TotalBreadCostEquals0_Int()
     {
-      Bread newBread = new Bread(6);
-      Assert.AreEqual(0, newBread.TotalBreadCost);
+      int result = Bread.TotalBreadCost;
+      Assert.AreEqual(result, 0);
     }
 
     [TestMethod]
     public void SetTotalBreadCost_SetValueOfTotalBreadCost_Int()
     {
-      Bread newBread = new Bread(8);
+      Bread.TotalBreadCost = 50;
       int newTotalBreadCost = 20;
-      newBread.TotalBreadCost = newTotalBreadCost;
-      Assert.AreEqual(newTotalBreadCost, newBread.TotalBreadCost);
+      Bread.TotalBreadCost = newTotalBreadCost;
+      Assert.AreEqual(newTotalBreadCost, Bread.TotalBreadCost);
     }
 
     [TestMethod]
     public void CalculateTotalBreadPrice_CalculateTotalBreadPriceForOneLoaf_Void()
     {
-      Bread newBread = new Bread(1);
-      newBread.CalculateTotalBreadPrice();
-      Assert.AreEqual(5, newBread.TotalBreadCost);
+      Bread.AmountOfBread = 1;
+      Bread.CalculateTotalBreadPrice();
+      Assert.AreEqual(5, Bread.TotalBreadCost);
     }
 
     [TestMethod]
     public void CalculateTotalBreadPrice_LoopUntilAmountOfBreadIsReached_Void()
     {
-      Bread newBread = new Bread(2);
-      newBread.CalculateTotalBreadPrice();
-      Assert.AreEqual(10, newBread.TotalBreadCost);
+      Bread.AmountOfBread = 2;
+      Bread.CalculateTotalBreadPrice();
+      Assert.AreEqual(10, Bread.TotalBreadCost);
     }
     [TestMethod]
     public void CalculateTotalBreadPrice_Every3rdBreadIsFree_Void()
     {
-      Bread newBread = new Bread(9);
-      newBread.CalculateTotalBreadPrice();
-      Assert.AreEqual(30, newBread.TotalBreadCost);
+      Bread.AmountOfBread = 6;
+      Bread.CalculateTotalBreadPrice();
+      Assert.AreEqual(20, Bread.TotalBreadCost);
+    }
+
+    [TestMethod]
+    public void ClearAll_ResetsBreadPriceAndBreadAmountValues_Void()
+    {
+      Bread.AmountOfBread = 100;
+      Bread.CalculateTotalBreadPrice();
+      Bread.ClearAll();
+      int result1 = Bread.TotalBreadCost;
+      int result2 = Bread.AmountOfBread;
+      Assert.AreEqual(result1, 0);
+      Assert.AreEqual(result2, 0);
     }
   }
 }
