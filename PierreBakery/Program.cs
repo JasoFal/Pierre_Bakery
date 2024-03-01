@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using PierreBakery.Models;
 
 namespace PierreBakery
@@ -14,15 +15,15 @@ namespace PierreBakery
       Console.WriteLine("Bread costs $5 each.");
       Console.WriteLine("Pastries cost $2 each.");
       Console.WriteLine("We are currently running a limited time promotion.");
-      Console.WriteLine("For the next week if you buy 2 bread you get 1 free and if you buy 3 pastries you get 1 free.");
+      Console.WriteLine("For the next week if you buy 2 loaves of bread you get 1 free and if you buy 3 pastries you get 1 free.");
       Console.WriteLine("Hurry now because the offer won't last.");
       Console.WriteLine("If you wish to purchase bread type in 'bread' below, if you wish to purchase pastries type in pastry below.");
       string userResponse = Console.ReadLine();
-      if (userResponse.ToLower() == "bread")
+      if (userResponse.ToLower() == "bread" || userResponse.ToLower() == "loaves")
       {
         PurchaseBreadUIResponse();
       }
-      else if (userResponse.ToLower() == "pastry")
+      else if (userResponse.ToLower() == "pastry" || userResponse.ToLower() == "pastries")
       {
         PurchasePastryUIResponse();
       }
@@ -34,13 +35,13 @@ namespace PierreBakery
     }
     static void PurchaseBreadUIResponse()
     {
-      Console.WriteLine("Please enter how many loafs you desire.");
+      Console.WriteLine("Please enter how many loaves you desire.");
       string userInputBread = Console.ReadLine();
       try
       {
         int shoppingCartBread = int.Parse(userInputBread);
-        Bread shopBread = new Bread(shoppingCartBread);
-        ConfirmOrEditShopBread(shopBread);
+        Bread.AmountOfBread = shoppingCartBread;
+        ConfirmOrEditShopBread();
       }
       catch
       {
@@ -57,8 +58,8 @@ namespace PierreBakery
       try
       {
         int shoppingCartPastries = int.Parse(userInputPastry);
-        Pastry shopPastry = new Pastry(shoppingCartPastries);
-        ConfirmOrEditShopPastry(shopPastry);
+        Pastry.AmountOfPastry = shoppingCartPastries;
+        ConfirmOrEditShopPastry();
       }
       catch
       {
@@ -68,87 +69,88 @@ namespace PierreBakery
         Main();
       }
     }
-    static void ConfirmOrEditShopBread(Bread shopBread)
+    static void ConfirmOrEditShopBread()
     {
       Console.WriteLine("Please confirm purchase.");
       Console.WriteLine("Shopping Cart:");
       Console.WriteLine("-----------------------");
-      Console.WriteLine($"Bread: {shopBread.AmountOfBread}");
+      Console.WriteLine($"Bread: {Bread.AmountOfBread}");
       Console.WriteLine("-----------------------");
-      Console.WriteLine("Is this correct? If so enter 'yes' below, if not enter any other key.");
+      Console.WriteLine("Is this correct? If so enter 'yes' below, if not enter any key.");
       string correctAmountOfBread = Console.ReadLine();
       if (correctAmountOfBread.ToLower() == "yes")
       {
-        CalculateShoppingCartBread(shopBread);
+        if (Pastry.AmountOfPastry == 0)
+        {
+          Console.WriteLine("Would you like to purchase pastries as well.");
+          Console.WriteLine("If so enter 'pastry' below.");
+          Console.WriteLine("Otherwise press any key.");
+          string response = Console.ReadLine();
+          if (response == "pastry" || response == "pastries")
+          {
+            PurchasePastryUIResponse();
+          }
+        }
+        ShoppingCart();
       }
       else
       {
-        Console.WriteLine("Please reenter the amount of loafs desired:");
+        Console.WriteLine("Please reenter the amount of loaves desired:");
         string reenteredShopCartBread = Console.ReadLine();
-        shopBread.AmountOfBread = int.Parse(reenteredShopCartBread);
-        ConfirmOrEditShopBread(shopBread);
+        Bread.AmountOfBread = int.Parse(reenteredShopCartBread);
+        ConfirmOrEditShopBread();
       }
     }
-    static void ConfirmOrEditShopPastry(Pastry shopPastry)
+    static void ConfirmOrEditShopPastry()
     {
       Console.WriteLine("Please confirm purchase");
       Console.WriteLine("Shopping Cart:");
       Console.WriteLine("-----------------------");
-      Console.WriteLine($"Pastry: {shopPastry.AmountOfPastry}");
+      Console.WriteLine($"Pastry: {Pastry.AmountOfPastry}");
       Console.WriteLine("-----------------------");
       Console.WriteLine("Is this correct? If so enter 'yes' below, if not enter any other key.");
       string correctAmountOfPastry = Console.ReadLine();
       if (correctAmountOfPastry.ToLower() == "yes")
       {
-        CalculateShoppingCartPastry(shopPastry);
+        if (Bread.AmountOfBread == 0)
+        {
+          Pastry.CalculateTotalPastryPrice();
+          Console.WriteLine("Would you like to purchase bread as well.");
+          Console.WriteLine("If so enter 'bread' below.");
+          string response = Console.ReadLine();
+          if (response.ToLower() == "bread" || response.ToLower() == "loaves")
+          {
+            PurchaseBreadUIResponse();
+          }
+        }
+        ShoppingCart();
       }
       else
       {
         Console.WriteLine("Please reenter the amount of pastries desired:");
         string reenteredShopCartPastry = Console.ReadLine();
-        shopPastry.AmountOfPastry = int.Parse(reenteredShopCartPastry);
-        ConfirmOrEditShopPastry(shopPastry);
+        Pastry.AmountOfPastry = int.Parse(reenteredShopCartPastry);
+        ConfirmOrEditShopPastry();
       }
     }
-    static void CalculateShoppingCartBread(Bread shopBread)
+    static void ShoppingCart()
     {
-      shopBread.CalculateTotalBreadPrice();
+      Bread.CalculateTotalBreadPrice();
+      Pastry.CalculateTotalPastryPrice();
       Console.WriteLine("----------------------------------------------------------");
+      if (Bread.AmountOfBread != 0)
+      {
+        Console.WriteLine($"Amount of Bread: {Bread.AmountOfBread}");
+      }
+      if (Pastry.AmountOfPastry != 0)
+      {
+        Console.WriteLine($"Amount of Pastry: {Pastry.AmountOfPastry}");
+      }
       Console.WriteLine("Your total is:");
-      Console.WriteLine($"${shopBread.TotalBreadCost}");
+      Console.WriteLine($"${Pastry.TotalPastryCost + Bread.TotalBreadCost}");
       Console.WriteLine("----------------------------------------------------------");
       Console.WriteLine("Thank you for shopping with us today!");
-      Console.WriteLine("Would you like to try some of our pastries as well?");
-      Console.WriteLine("If so enter 'pastries' below otherwise enter any key to exit.");
-      string newOrder = Console.ReadLine();
-      if (newOrder.ToLower() == "pastries")
-      {
-        PurchasePastryUIResponse();
-      }
-      else
-      {
-        Console.WriteLine("Goodbye!");
-      }
-    }
-    static void CalculateShoppingCartPastry(Pastry shopPastry)
-    {
-      shopPastry.CalculateTotalPastryPrice();
-      Console.WriteLine("----------------------------------------------------------");
-      Console.WriteLine("Your total is:");
-      Console.WriteLine($"${shopPastry.TotalPastryCost}");
-      Console.WriteLine("----------------------------------------------------------");
-      Console.WriteLine("Thank you for shopping with us today!");
-      Console.WriteLine("Would you like to try some of our bread as well?");
-      Console.WriteLine("If so enter 'bread' below otherwise enter any key to exit.");
-      string newOrder = Console.ReadLine();
-      if (newOrder.ToLower() == "bread")
-      {
-        PurchaseBreadUIResponse();
-      }
-      else
-      {
-        Console.WriteLine("Goodbye!");
-      }
+      Console.WriteLine("Goodbye!");
     }
   }
 }
