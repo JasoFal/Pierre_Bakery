@@ -1,37 +1,35 @@
-# _C# Template Repo_
+# _Pierre Bakery_
 
 #### By _**Jason Falk**_
 
-#### _Boilerplate template for C#._
+#### _A Fidgetech independent project for C# TDD._
 
 ## Technologies Used
 
-* _List all_
-* _the major technologies_
-* _you used in your project_
-* _here_
+* _C#_
+* _Dotnet_
+* _Git/ Git Bash_
 
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does as well as any other information you want users or other developers to have.}_
+_Welcome to Pierre Bakery we have 2 products bread and pastries. Bread is $5 and pastries are $2. Currently we have a limited time promotion bread is buy 2 get 1 free and pastries are buy 3 get 1 free. Hurry because these offers won't last._
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
-
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this application depends on? We recommend deleting the project from your desktop, re-cloning the project from GitHub, and writing down all the steps necessary to get the project working again.}_
+1. _Open Git Bash/Open terminal of your choice navigate to directory of your choice and run this command `git clone https://github.com/JasoFal/Pierre_Bakery.git`_
+2. _Once you have cloned the project, navigate to project folder using Git Bash/ a terminal of your choice using the cd command. Or you can use file explorer to open the project manually._
+3. _Then once in the PierreBakery directory, run: `dotnet build`._
+------------------
+* _Optional Run and Test_
+* _To run the app type `dotnet run` in terminal within PierreBakery directory_
+* _To test the app type `dotnet test` in terminal within PierreBakery.Tests_
 
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* _No known bugs_
 
 ## License
 
 _MIT_
 
-Copyright (c) _date_ _author name(s)_
+Copyright (c) _10/17/23_ _Jason Falk_
