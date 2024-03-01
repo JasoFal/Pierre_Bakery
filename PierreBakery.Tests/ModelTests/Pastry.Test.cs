@@ -1,73 +1,82 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PierreBakery.Models;
 
 namespace PierreBakery.Tests
 {
   [TestClass]
-  public class PastryTests
+  public class PastryTests : IDisposable
   {
-    [TestMethod]
-    public void PastryConstructor_CreatesInstanceOfPastry_Pastry()
+
+    public void Dispose()
     {
-      Pastry newPastry = new Pastry(6);
-      Assert.AreEqual(typeof(Pastry), newPastry.GetType());
+      Pastry.ClearAll();
     }
 
     [TestMethod]
-    public void GetAmountOfPastry_ReturnAmountOfPastry_Int()
+    public void AmountOfPastry_AmountOfPastryEquals0_Int()
     {
-      int newAmountOfPastry = 6;
-      Pastry newPastry = new Pastry(newAmountOfPastry);
-      int result = newPastry.AmountOfPastry;
-      Assert.AreEqual(newAmountOfPastry, result);
+      int result = Pastry.AmountOfPastry;
+      Assert.AreEqual(result, 0);
     }
 
     [TestMethod]
     public void SetAmountOfPastry_SetsValueOfAmountOfPastry_Void()
     {
-      Pastry newPastry = new Pastry(7);
+      Pastry.AmountOfPastry = 10;
       int newAmountOfPastry = 47;
-      newPastry.AmountOfPastry = newAmountOfPastry;
-      Assert.AreEqual(newAmountOfPastry, newPastry.AmountOfPastry);
+      Pastry.AmountOfPastry = newAmountOfPastry;
+      Assert.AreEqual(newAmountOfPastry, Pastry.AmountOfPastry);
     }
 
     [TestMethod]
-    public void GetTotalPastryCost_ReturnTotalPastryCost_Int()
+    public void TotalPastryCost_TotalPastryCostEquals0_Int()
     {
-      Pastry newPastry = new Pastry(6);
-      Assert.AreEqual(0, newPastry.TotalPastryCost);
+      int result = Pastry.TotalPastryCost;
+      Assert.AreEqual(result, 0);
     }
 
     [TestMethod]
     public void SetTotalPastryCost_SetsValueOfTotalPastryCost_Void()
     {
-      Pastry newPastry = new Pastry(6);
-      newPastry.TotalPastryCost += 5;
-      Assert.AreEqual(5, newPastry.TotalPastryCost);
+      Pastry.TotalPastryCost = 10;
+      int newPastryCost = 20;
+      Pastry.TotalPastryCost = newPastryCost;
+      Assert.AreEqual(20, Pastry.TotalPastryCost);
     }
 
     [TestMethod]
     public void CalculateTotalPastryPrice_CalculatesTotalPastryPriceForOnePastry_Void()
     {
-      Pastry newPastry = new Pastry(1);
-      newPastry.CalculateTotalPastryPrice();
-      Assert.AreEqual(2, newPastry.TotalPastryCost);
+      Pastry.AmountOfPastry = 1;
+      Pastry.CalculateTotalPastryPrice();
+      Assert.AreEqual(2, Pastry.TotalPastryCost);
     }
 
     [TestMethod]
     public void CalculateTotalPastryPrice_LoopUntilAmountOfBreadIsReached_Void()
     {
-      Pastry newPastry = new Pastry(2);
-      newPastry.CalculateTotalPastryPrice();
-      Assert.AreEqual(4, newPastry.TotalPastryCost);
+      Pastry.AmountOfPastry = 2;
+      Pastry.CalculateTotalPastryPrice();
+      Assert.AreEqual(4, Pastry.TotalPastryCost);
     }
 
     [TestMethod]
     public void CalculateTotalPastryPrice_Every4thPastryIsSkipped_Void()
     {
-      Pastry newPastry = new Pastry(20);
-      newPastry.CalculateTotalPastryPrice();
-      Assert.AreEqual(30, newPastry.TotalPastryCost);
+      Pastry.AmountOfPastry = 4;
+      Pastry.CalculateTotalPastryPrice();
+      Assert.AreEqual(6, Pastry.TotalPastryCost);
+    }
+
+    [TestMethod]
+    public void ClearAll_ResetsPastryPriceAndPastryAmountValues_Void()
+    {
+      Pastry.AmountOfPastry = 500;
+      Pastry.CalculateTotalPastryPrice();
+      Pastry.ClearAll();
+      int result = Pastry.TotalPastryCost;
+      Assert.AreEqual(result, 0);
     }
   }
 }
