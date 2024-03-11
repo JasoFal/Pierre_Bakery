@@ -82,9 +82,9 @@ namespace PierreBakery
         {
           Console.WriteLine("Would you like to purchase pastries as well.");
           Console.WriteLine("If so enter 'pastry' below.");
-          Console.WriteLine("Otherwise press any key.");
+          Console.WriteLine("Otherwise enter any key (within reason) to go to shopping cart.");
           string response = Console.ReadLine();
-          if (response == "pastry" || response == "pastries")
+          if (response.ToLower() == "pastry" || response.ToLower() == "pastries" || response.ToLower() == "yes")
           {
             PurchasePastryUIResponse();
           }
@@ -112,14 +112,14 @@ namespace PierreBakery
       {
         if (Bread.AmountOfBread == 0)
         {
-          Pastry.CalculateTotalPastryPrice();
           Console.WriteLine("Would you like to purchase bread as well.");
           Console.WriteLine("If so enter 'bread' below.");
+          Console.WriteLine("Otherwise enter any key (within reason) to go to shopping cart.");
           string response = Console.ReadLine();
-          if (response.ToLower() == "bread" || response.ToLower() == "loaves")
+          if (response.ToLower() == "bread" || response.ToLower() == "loaves" || response.ToLower() == "yes")
           {
             PurchaseBreadUIResponse();
-          }
+          }    
         }
         ShoppingCart();
       }
@@ -133,8 +133,14 @@ namespace PierreBakery
     }
     static void ShoppingCart()
     {
-      Bread.CalculateTotalBreadPrice();
-      Pastry.CalculateTotalPastryPrice();
+      if (Bread.TotalBreadCost == 0)
+      {
+        Bread.CalculateTotalBreadPrice();
+      }
+      if (Pastry.TotalPastryCost == 0)
+      {
+        Pastry.CalculateTotalPastryPrice();
+      }
       Console.WriteLine("----------------------------------------------------------");
       if (Bread.AmountOfBread != 0)
       {
